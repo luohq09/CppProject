@@ -67,6 +67,8 @@ namespace paradigm4 {
                 if (head->key == key) {
                     return head;
                 }
+
+                head = head->next;
             }
 
             return nullptr;
@@ -172,6 +174,9 @@ namespace paradigm4 {
 
             _size_mask = size - 1;
             tableEntryT **buckets = new tableEntryT *[size];
+            for (size_t i = 0; i < size; ++i) {
+                buckets[i] = nullptr;
+            }
 
             // Full table rehash
             for (size_t i = 0; i < _size; ++i) {

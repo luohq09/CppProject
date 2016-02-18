@@ -15,7 +15,7 @@ namespace paradigm4 {
     struct hash<_Tp>                              \
     {                                              \
       size_t                                        \
-      operator()(_Tp __val) const noexcept           \
+      operator()(_Tp __val) const           \
       { return static_cast<size_t>(__val); }          \
     };
 
@@ -33,12 +33,6 @@ namespace paradigm4 {
 
     /// Explicit specialization for wchar_t.
     _Cxx_hashtable_define_trivial_hash(wchar_t)
-
-    /// Explicit specialization for char16_t.
-    _Cxx_hashtable_define_trivial_hash(char16_t)
-
-    /// Explicit specialization for char32_t.
-    _Cxx_hashtable_define_trivial_hash(char32_t)
 
     /// Explicit specialization for short.
     _Cxx_hashtable_define_trivial_hash(short)
