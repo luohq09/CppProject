@@ -189,7 +189,7 @@ double calculate_loss(const unordered_map<idxT, weightT> &weights, const vector<
         l1_val += abs(it->second);
     }
 
-    return loss / data.size() + l1_val;
+    return loss / data.size() + l1_val * l1_penalty_weight;
 }
 
 void train(const string &in_data_file, const string &out_model_file) {
