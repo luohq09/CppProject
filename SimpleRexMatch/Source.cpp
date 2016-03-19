@@ -76,6 +76,10 @@ public:
                 if (ins.c == c || ins.c == '.') {
                     _add_state(ins.out, nlist);
                 }
+
+                if (ins.last_list != nlist) {
+                    ins.last_list = -1;
+                }
             }
 
             _lists[_clist].clear();
