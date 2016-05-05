@@ -36,6 +36,11 @@ CannonClientWrapper::CannonClientWrapper(std::string &&host, int port) :
 }
 
 CannonClientWrapper::~CannonClientWrapper() {
+    auto protocol = _client->getInputProtocol();
+    auto transport = protocol->getTransport();
+    if (transport->isOpen()) {
+        transport->close();
+    }
 }
 /*
 std::shared_ptr<ThreadPool> &CannonClientWrapper::_get_insert_thread_pool() {
@@ -57,9 +62,11 @@ CannonClientWrapper::insert_ret_type insert_kvs_f(
         const int data_version) {
     auto protocol = client->getInputProtocol();
     auto transport = protocol->getTransport();
-    transport->open();
+    if (!transport->isOpen()) {
+        transport->open();
+    }
     auto ret = client->insert(*kvs, data_version);
-    transport->close();
+    // transport->close();
     return ret;
 }
 
@@ -74,10 +81,12 @@ CannonClientWrapper::query_ret_type query_keys_f(
         const int data_version) {
     auto protocol = client->getInputProtocol();
     auto transport = protocol->getTransport();
-    transport->open();
+    if (!transport->isOpen()) {
+        transport->open();
+    }
     cannon::CannonResponse rps;
     client->get(rps, *keys, data_version);
-    transport->close();
+    // transport->close();
     CannonClientWrapper::query_ret_type ret(std::move(rps.values));
     return ret;
 }
@@ -90,9 +99,11 @@ std::future<CannonClientWrapper::query_ret_type> CannonClientWrapper::enqueue_qu
 bool clear_data_f(std::shared_ptr<cannon::CannonClient> client, const int data_version) {
     auto protocol = client->getInputProtocol();
     auto transport = protocol->getTransport();
-    transport->open();
+    if (!transport->isOpen()) {
+        transport->open();
+    }
     auto ret = client->clear_data(data_version);
-    transport->close();
+    // transport->close();
     return ret;
 }
 
