@@ -1,7 +1,16 @@
 //
 // Created by LuoHuaqing on 2/15/16.
 //
-
+/*
+ * Usage example:
+ * paradigm4::immutable_hash_table ht;
+ * ht.beginLoading();
+ * ht.insert(key, value);
+ * ...
+ * ht.endLoading();
+ *
+ * paradigm4::tableEntry<keyT, valT> *entry = ht.find(key);
+ */
 #ifndef CANNON_IMMUTABLE_HASH_TABLE_H
 #define CANNON_IMMUTABLE_HASH_TABLE_H
 
@@ -29,7 +38,7 @@ namespace paradigm4 {
         tableEntry *next;
 
         tableEntry() : next(nullptr) {}
-        tableEntry(keyT k, valT v) : key(k), val(v), next(nullptr) {}
+        tableEntry(const keyT &k, const valT &v) : key(k), val(v), next(nullptr) {}
     };
 
     template <typename keyT, typename valT>
@@ -84,7 +93,7 @@ namespace paradigm4 {
             _loading = false;
         }
 
-        tableEntryT *insert(keyT key, valT val) {
+        tableEntryT *insert(const keyT &key, const valT &val) {
             // immutable: only insert data during 'loading'
             if (!_loading) {
                 return nullptr;
@@ -117,6 +126,10 @@ namespace paradigm4 {
             return _used;
         }
 
+        size_t bucketCount() {
+            return _size;
+        }
+
     private:
         tableEntryT **_buckets;
         size_t _size;
@@ -145,12 +158,13 @@ namespace paradigm4 {
         }
 
         void _reset() {
-            for (size_t i = 0; i < _size; ++i) {
-                _freeEntryList(i);
+            if (_used > 0) {
+                for (size_t i = 0; i < _size; ++i) {
+                    _freeEntryList(i);
+                }
+                _used = 0;
+                _loading = false;
             }
-            _used = 0;
-            _loading = false;
-
         }
 
         void _expandIfNeeded() {
@@ -187,7 +201,6 @@ namespace paradigm4 {
                     tableEntryT *next = head->next;
                     head->next = buckets[h];
                     buckets[h] = head;
-
                     head = next;
                 }
             }
