@@ -212,7 +212,7 @@ private:
 private:
     CannonClientWrapper *_clients;
     int _clients_num {0};
-    volatile int _data_version {0};
+    std::atomic<int> _data_version {0};
     std::string _version;
     std::atomic_flag _is_loading {ATOMIC_FLAG_INIT};
 };
