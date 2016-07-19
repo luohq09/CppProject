@@ -7,8 +7,8 @@
 using namespace std;
 using namespace paradigm4;
 
-int test() {
-    const int n = 10000;
+void test() {
+    const int n = 10000000;
     srand((unsigned)time(NULL));
     vector<std::pair<int, int>> elements;
     elements.reserve(n);
