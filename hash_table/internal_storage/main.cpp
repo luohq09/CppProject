@@ -30,7 +30,11 @@ void test() {
     }
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    cout<< "Searching time: " << elapsed_secs << " seconds" << endl;
+    cout << "Searching time: " << elapsed_secs << " seconds" << endl;
+
+    cout << "Enter any character." << endl;
+    char c;
+    cin >> &c;
 }
 
 int main() {
