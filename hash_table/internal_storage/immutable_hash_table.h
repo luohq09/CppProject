@@ -2,8 +2,8 @@
 // Created by LuoHuaqing on 7/19/16.
 //
 
-#ifndef IMMUTABLE_HASH_TABLE_IMMUTABLE_HASH_TABLE_H
-#define IMMUTABLE_HASH_TABLE_IMMUTABLE_HASH_TABLE_H
+#ifndef IMMUTABLE_HASH_TABLE_H
+#define IMMUTABLE_HASH_TABLE_H
 
 #include <vector>
 #include <utility>
@@ -82,4 +82,4 @@ namespace paradigm4 {
     };
 }
 
-#endif //IMMUTABLE_HASH_TABLE_IMMUTABLE_HASH_TABLE_H
+#endif //IMMUTABLE_HASH_TABLE_H
