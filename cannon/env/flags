@@ -1,0 +1,5 @@
+--log_dir=./logs
+--logbufsecs=0
+--port=9090
+--kv_path=./test/weights
+--kv_schema_path=./test/schema.json

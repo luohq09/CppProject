@@ -1,0 +1,17 @@
+include_directories("../")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/test/bin)
+link_libraries(gtest glog cannonlib gflags)
+
+add_executable(storage_test storage_test.cpp)
+target_link_libraries(storage_test ${Boost_LIBRARIES})
+target_link_libraries(storage_test cannonlib)
+target_link_libraries(storage_test gtest)
+target_link_libraries(storage_test gflags)
+target_link_libraries(storage_test glog)
+
+add_executable(storage_perf_test storage_perf_test.cpp)
+target_link_libraries(storage_perf_test ${Boost_LIBRARIES})
+target_link_libraries(storage_perf_test cannonlib)
+target_link_libraries(storage_perf_test gtest)
+target_link_libraries(storage_perf_test gflags)
+target_link_libraries(storage_perf_test glog)
