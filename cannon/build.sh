@@ -4,6 +4,7 @@ rm -rf build
 mkdir build
 cd build
 
+source /opt/rh/devtoolset-3/enable || true
 cmake ..
 make clean
 make -j8
